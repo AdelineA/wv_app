@@ -1,55 +1,69 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import Link from "next/link"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [ownerDetails, setOwnerDetails] = useState({
     venueName: "",
     venueLocation: "",
     contactPhone: "",
     description: "",
-  })
+  });
 
   const handleGoogleSignup = async (userType: "customer" | "owner") => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       // In a real app, this would redirect to Google OAuth
-      console.log(`Google signup for ${userType}`)
+      console.log(`Google signup for ${userType}`);
 
       // Simulate OAuth flow
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       if (userType === "owner") {
-        alert("Owner registration successful! Please complete your venue details.")
+        alert(
+          "Owner registration successful! Please complete your venue details."
+        );
         // In a real app, you'd redirect to a venue setup page
       } else {
-        alert("Customer registration successful! Welcome to Wedding Venues Kigali!")
-        window.location.href = "/venues"
+        alert(
+          "Customer registration successful! Welcome to Wedding Venues Kigali!"
+        );
+        if (typeof window !== "undefined") {
+          window.location.href = "/venues";
+        }
       }
     } catch (error) {
-      console.error("Signup error:", error)
-      alert("Registration failed. Please try again.")
+      console.error("Signup error:", error);
+      alert("Registration failed. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleOwnerDetailsSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Owner details:", ownerDetails)
-    alert("Venue details saved! Your account is now complete.")
-    window.location.href = "/owner-dashboard"
-  }
+    e.preventDefault();
+    console.log("Owner details:", ownerDetails);
+    alert("Venue details saved! Your account is now complete.");
+    if (typeof window !== "undefined") {
+      window.location.href = "/owner-dashboard";
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -57,12 +71,16 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">WV</span>
+              <span className="text-primary-foreground font-bold text-sm">
+                WV
+              </span>
             </div>
             <span className="text-xl font-bold">Wedding Venues Kigali</span>
           </div>
           <h1 className="text-2xl font-bold">Create Your Account</h1>
-          <p className="text-muted-foreground">Join us with your Google account</p>
+          <p className="text-muted-foreground">
+            Join us with your Google account
+          </p>
         </div>
 
         <Tabs defaultValue="customer" className="w-full">
@@ -75,7 +93,9 @@ export default function RegisterPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Customer Registration</CardTitle>
-                <CardDescription>Create an account to book wedding venues</CardDescription>
+                <CardDescription>
+                  Create an account to book wedding venues
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Button
@@ -107,7 +127,11 @@ export default function RegisterPage() {
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                      <svg
+                        className="h-5 w-5 text-green-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
                         <path
                           fillRule="evenodd"
                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -116,7 +140,9 @@ export default function RegisterPage() {
                       </svg>
                     </div>
                     <div className="ml-3">
-                      <h3 className="text-sm font-medium text-green-800">What you get:</h3>
+                      <h3 className="text-sm font-medium text-green-800">
+                        What you get:
+                      </h3>
                       <ul className="mt-1 text-sm text-green-700 list-disc list-inside">
                         <li>Browse all wedding venues</li>
                         <li>Submit booking requests</li>
@@ -128,7 +154,10 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="text-center text-sm text-muted-foreground">
-                  <p>By signing up, you agree to our Terms of Service and Privacy Policy</p>
+                  <p>
+                    By signing up, you agree to our Terms of Service and Privacy
+                    Policy
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -138,7 +167,9 @@ export default function RegisterPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Venue Owner Registration</CardTitle>
-                <CardDescription>List your venue and manage bookings</CardDescription>
+                <CardDescription>
+                  List your venue and manage bookings
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Button
@@ -169,8 +200,13 @@ export default function RegisterPage() {
 
                 {/* Venue Details Form (shown after Google signup) */}
                 <div className="border-t pt-4">
-                  <h3 className="text-sm font-medium mb-3">Complete Your Venue Profile</h3>
-                  <form onSubmit={handleOwnerDetailsSubmit} className="space-y-3">
+                  <h3 className="text-sm font-medium mb-3">
+                    Complete Your Venue Profile
+                  </h3>
+                  <form
+                    onSubmit={handleOwnerDetailsSubmit}
+                    className="space-y-3"
+                  >
                     <div>
                       <Label htmlFor="venue-name" className="text-xs">
                         Venue Name
@@ -179,7 +215,12 @@ export default function RegisterPage() {
                         id="venue-name"
                         placeholder="e.g., Kigali Grand Hotel"
                         value={ownerDetails.venueName}
-                        onChange={(e) => setOwnerDetails({ ...ownerDetails, venueName: e.target.value })}
+                        onChange={(e) =>
+                          setOwnerDetails({
+                            ...ownerDetails,
+                            venueName: e.target.value,
+                          })
+                        }
                         className="h-9"
                       />
                     </div>
@@ -191,7 +232,12 @@ export default function RegisterPage() {
                         id="venue-location"
                         placeholder="e.g., Kimihurura, Kigali"
                         value={ownerDetails.venueLocation}
-                        onChange={(e) => setOwnerDetails({ ...ownerDetails, venueLocation: e.target.value })}
+                        onChange={(e) =>
+                          setOwnerDetails({
+                            ...ownerDetails,
+                            venueLocation: e.target.value,
+                          })
+                        }
                         className="h-9"
                       />
                     </div>
@@ -203,7 +249,12 @@ export default function RegisterPage() {
                         id="contact-phone"
                         placeholder="+250 788 123 456"
                         value={ownerDetails.contactPhone}
-                        onChange={(e) => setOwnerDetails({ ...ownerDetails, contactPhone: e.target.value })}
+                        onChange={(e) =>
+                          setOwnerDetails({
+                            ...ownerDetails,
+                            contactPhone: e.target.value,
+                          })
+                        }
                         className="h-9"
                       />
                     </div>
@@ -215,7 +266,12 @@ export default function RegisterPage() {
                         id="description"
                         placeholder="Describe your venue..."
                         value={ownerDetails.description}
-                        onChange={(e) => setOwnerDetails({ ...ownerDetails, description: e.target.value })}
+                        onChange={(e) =>
+                          setOwnerDetails({
+                            ...ownerDetails,
+                            description: e.target.value,
+                          })
+                        }
                         className="h-20 text-sm"
                       />
                     </div>
@@ -228,7 +284,11 @@ export default function RegisterPage() {
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <svg className="h-4 w-4 text-blue-400 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                      <svg
+                        className="h-4 w-4 text-blue-400 mt-0.5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
                         <path
                           fillRule="evenodd"
                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -237,7 +297,9 @@ export default function RegisterPage() {
                       </svg>
                     </div>
                     <div className="ml-2">
-                      <h3 className="text-xs font-medium text-blue-800">Owner Benefits:</h3>
+                      <h3 className="text-xs font-medium text-blue-800">
+                        Owner Benefits:
+                      </h3>
                       <ul className="mt-1 text-xs text-blue-700 list-disc list-inside">
                         <li>Manage booking requests</li>
                         <li>Set venue availability</li>
@@ -259,11 +321,14 @@ export default function RegisterPage() {
               Sign in
             </Link>
           </p>
-          <Link href="/" className="text-sm text-muted-foreground hover:text-primary">
+          <Link
+            href="/"
+            className="text-sm text-muted-foreground hover:text-primary"
+          >
             ← Back to Home
           </Link>
         </div>
       </div>
     </div>
-  )
+  );
 }

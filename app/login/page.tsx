@@ -1,37 +1,44 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Link from "next/link"
-import { useState } from "react"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function LoginPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleLogin = async (userType: "customer" | "owner") => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       // In a real app, this would redirect to Google OAuth
-      console.log(`Google login for ${userType}`)
+      console.log(`Google login for ${userType}`);
 
       // Simulate OAuth flow
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      if (userType === "owner") {
-        alert("Owner login successful! Redirecting to dashboard...")
-        window.location.href = "/owner-dashboard"
-      } else {
-        alert("Customer login successful! Redirecting to venues...")
-        window.location.href = "/venues"
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      if (typeof window !== "undefined") {
+        if (userType === "owner") {
+          alert("Owner login successful! Redirecting to dashboard...");
+          window.location.href = "/owner-dashboard";
+        } else {
+          alert("Customer login successful! Redirecting to venues...");
+          window.location.href = "/venues";
+        }
       }
     } catch (error) {
-      console.error("Login error:", error)
-      alert("Login failed. Please try again.")
+      console.error("Login error:", error);
+      alert("Login failed. Please try again.");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -39,12 +46,16 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">WV</span>
+              <span className="text-primary-foreground font-bold text-sm">
+                WV
+              </span>
             </div>
             <span className="text-xl font-bold">Wedding Venues Kigali</span>
           </div>
           <h1 className="text-2xl font-bold">Welcome Back</h1>
-          <p className="text-muted-foreground">Sign in with your Google account</p>
+          <p className="text-muted-foreground">
+            Sign in with your Google account
+          </p>
         </div>
 
         <Tabs defaultValue="customer" className="w-full">
@@ -57,7 +68,9 @@ export default function LoginPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Customer Login</CardTitle>
-                <CardDescription>Sign in to book your dream wedding venue</CardDescription>
+                <CardDescription>
+                  Sign in to book your dream wedding venue
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Button
@@ -87,7 +100,10 @@ export default function LoginPage() {
                 </Button>
 
                 <div className="text-center text-sm text-muted-foreground">
-                  <p>By continuing, you agree to our Terms of Service and Privacy Policy</p>
+                  <p>
+                    By continuing, you agree to our Terms of Service and Privacy
+                    Policy
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -97,7 +113,9 @@ export default function LoginPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Venue Owner Login</CardTitle>
-                <CardDescription>Access your venue management dashboard</CardDescription>
+                <CardDescription>
+                  Access your venue management dashboard
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Button
@@ -129,7 +147,11 @@ export default function LoginPage() {
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                      <svg
+                        className="h-5 w-5 text-blue-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
                         <path
                           fillRule="evenodd"
                           d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -138,9 +160,14 @@ export default function LoginPage() {
                       </svg>
                     </div>
                     <div className="ml-3">
-                      <h3 className="text-sm font-medium text-blue-800">New venue owner?</h3>
+                      <h3 className="text-sm font-medium text-blue-800">
+                        New venue owner?
+                      </h3>
                       <div className="mt-1 text-sm text-blue-700">
-                        <p>After signing in, you'll be able to list your venue and manage bookings.</p>
+                        <p>
+                          After signing in, you'll be able to list your venue
+                          and manage bookings.
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -151,11 +178,14 @@ export default function LoginPage() {
         </Tabs>
 
         <div className="mt-6 text-center">
-          <Link href="/" className="text-sm text-muted-foreground hover:text-primary">
+          <Link
+            href="/"
+            className="text-sm text-muted-foreground hover:text-primary"
+          >
             ← Back to Home
           </Link>
         </div>
       </div>
     </div>
-  )
+  );
 }
